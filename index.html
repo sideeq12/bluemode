@@ -119,6 +119,7 @@ border-radius: 20px;
     }
     .success .nine{
         height: 40vh;
+        width: 400px;
     }
     .loading{
         height: 100vh;
@@ -134,6 +135,10 @@ border-radius: 20px;
         align-items: center;
         gap: 3rem;
     }
+
+    @media (max-width : 960px) {
+        
+    }
 </style>
 <body>
     <div class="bg ">
@@ -148,7 +153,11 @@ border-radius: 20px;
         </div>
         <div class="popStar hidden">
             <img src="fd.png" class="h-[5vh] lg:h-[10vh] w-fit mx-auto" />
-            <div class="infoSec flex bg-white rounded-lg mt-6">
+            <div class="infoSec relative flex bg-white rounded-lg mt-6">
+                <div>
+                    <img src="check.png"  class="absolute check hidden rounded-full border-4 border-white
+                     -top-6 right-10 h-16 bg-white">
+                </div>
                 <div class="infoSecL">
                   <div class="topsec">
                         <div>
@@ -220,10 +229,10 @@ border-radius: 20px;
                         </div>
                     </div>
                    </div>
-                   <div class="success hidden relative">
+                   <div class="success hidden relative pt-6 ">
                     <img src="phone.png" class="nine" />
                     <img src="Confirmé.png" class="h-10 mx-auto" />
-                    <img src="Frame.png" class="absolute top-0 w-90" />
+                    <img src="Frame.png" class="absolute top-3 w-90" />
                     <div class="font-semibold italic mx-auto w-fit text-sm">Merci de nous avoir choisis !</div>
                   </div>
                   </div>
@@ -245,15 +254,15 @@ border-radius: 20px;
                         Remplissez vos coordonneés
                     </div>
                     <form class="" onsubmit="return handleSubmit(event)">
-                        <input  type="text" placeholder="Nom de famille" class="outline-none"/>
-                        <input  type="text" placeholder="Adress email" class="outline-none"/>
-                        <input  type="text" placeholder="Adress" class="outline-none"/>
+                        <input  type="text" placeholder="Nom de famille" class="outline-none " required/>
+                        <input  type="text" placeholder="Adress email" class="outline-none" required/>
+                        <input  type="text" placeholder="Adress" class="outline-none" required/>
                         <div class="split">
-                        <input  type="text" placeholder="Ville" class="outline-none"/>
-                        <input  type="text" placeholder="Code Portal" class="outline-none"/>
+                        <input  type="text" placeholder="Ville" class="outline-none" required/>
+                        <input  type="text" placeholder="Code Portal" class="outline-none code" required />
                         </div>
-                        <div class="flex justify-center align-center text-sm" >
-                        <input  type="checkbox" /><span class="mt-2">
+                        <div class="flex justify-center align-center text-sm"  >
+                        <input  type="checkbox"  required/><span class="mt-2">
                             jai plus de 18 ans et j'accepte les conditions</span>
                         </div>
                         <button type="submit">
@@ -264,10 +273,13 @@ border-radius: 20px;
                   <div class="hidden payd">
                     <div class="w-fit mx-auto text-sm font-semibold">Informations de paiement</div>
                     <form  onsubmit="return handlePay(event)">
-                        <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none"/>
+                        <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none"
+                         maxlength="19" oninput="formatCardNumber(event)" required />
                         <div class="split mt-3">
-                        <input  type="text" placeholder="MM/YY" class="outline-none"/>
-                        <input  type="text" placeholder="CVV" class="outline-none"/>
+                        <input  type="text" placeholder="MM/YY" maxlength="5"
+                        oninput="formatCardExpiration(event)" class="outline-none cardDate"  required/>
+                        <input  type="text"   maxlength="3"  placeholder="CVV"  
+                              oninput="formatCVV(event)"class="outline-none cvv"   required/>
                         </div>
                         <button type="submit" class="mt-3">
                             <img src="pay.png" />
@@ -304,7 +316,20 @@ border-radius: 20px;
     const infoSecDetails = document.querySelector(".infoSecDetails")
     const infoSec = document.querySelector(".infoSec")
     const list = document.querySelector(".list")
+    const check = document.querySelector(".check")
     const loading = document.querySelector(".loading")
+    const close = document.querySelector(".close")
+    const code = document.querySelector(".code")
+    const cardDate= document.querySelector(".cardDate")
+    const cvv = document.querySelector(".cvv")
+
+
+
+
+    restrictToNumbers(code)
+
+
+
     start.addEventListener("click", ()=>{
         bg.style.display ="none"
         popStar.style.display = "block"
@@ -326,7 +351,10 @@ border-radius: 20px;
     setTimeout(myFunction, 2000);
             return false; // Return false to further prevent default behavior
         }
-
+        close.addEventListener("click", ()=>{
+            popStar.style.display = "none"
+        bg.style.display ="block"
+        })
     function countdown() {
     let timeLeft = 150;
     let timer = setInterval(function() {
@@ -350,6 +378,7 @@ function myFunction() {
  
     loading.style.display = "none"
     infoSec.style.width = "fit-content"
+    infoSec.style.marginTop = "70px"
     infoSecDetails.style.display = "none"
             list.style.display = "none" 
             infoSec.style.margin = "0px auto" 
@@ -357,6 +386,62 @@ function myFunction() {
         pro2.style.display ="none"
         pro3.style.display = "block"
         success.style.display = "block"
+        check.style.display = "block"
+}
+
+function restrictToNumbers(inputElement) {
+    inputElement.addEventListener('input', function(event) {
+        let inputValue = inputElement.value;
+
+        inputValue = inputValue.replace(/\D/g, '');
+
+        inputElement.value = inputValue;
+    });
+}
+
+
+function formatCVV(event) {
+  let input = event.target;
+  let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+  value = value.substring(0, 3);
+  input.value = formattedValue.trim();
+}
+
+
+
+function formatCardExpiration(event) {
+  let input = event.target;
+  let value = input.value.replace(/\D/g, '');
+  if (event.inputType === 'deleteContentBackward') {
+    if (input.selectionStart <= 3) {
+      value = value.substring(0, input.selectionStart);
+    } else {
+      value = value.substring(0, 2) + value.substring(3, input.selectionStart);
+    }
+  } else {
+    value = value.substring(0, 4); 
+    value = value.replace(/(\d{2})(\d{0,2})/, '$1/$2');
+  }
+  
+  input.value = value;
+  if(value.length == 5){
+    cvv.focus()
+  }
+}
+function formatCardNumber(event) {
+  let input = event.target;
+  let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+  value = value.substring(0, 16); // Limit to 16 digits
+
+  let formattedValue = '';
+  for (let i = 0; i < value.length; i += 4) {
+    formattedValue += value.substr(i, 4) + ' ';
+  }
+
+  input.value = formattedValue.trim();
+  if(input.value.length == 19){
+    cardDate.focus()
+  }
 }
     </script>
 </html>
