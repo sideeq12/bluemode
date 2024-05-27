@@ -117,8 +117,22 @@ border-radius: 20px;
         right: 10px;
         top: 10px;
     }
-    .success img{
-        height: 50vh;
+    .success .nine{
+        height: 40vh;
+    }
+    .loading{
+        height: 100vh;
+        width: 100vw;
+        text-align: center;
+        padding-top: 25vh;
+        position: fixed;
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0.89);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
     }
 </style>
 <body>
@@ -207,7 +221,10 @@ border-radius: 20px;
                     </div>
                    </div>
                    <div class="success hidden relative">
-                    <img src="phone.png" class="" />
+                    <img src="phone.png" class="nine" />
+                    <img src="Confirmé.png" class="h-10 mx-auto" />
+                    <img src="Frame.png" class="absolute top-0 w-90" />
+                    <div class="font-semibold italic mx-auto w-fit text-sm">Merci de nous avoir choisis !</div>
                   </div>
                   </div>
                 </div>
@@ -265,7 +282,11 @@ border-radius: 20px;
             </div>
         </div>
     </div>
-
+<div class="loading hidden text-white">
+    <img src="load.gif" class="h-24 mx-auto"/>
+    <div class="w-72 mt-3 text-center italic mx-auto">Veuillez patienter, nous sommes en 
+        train de traiter l'information</div>
+</div>
 </body>
 
 <script>
@@ -283,6 +304,7 @@ border-radius: 20px;
     const infoSecDetails = document.querySelector(".infoSecDetails")
     const infoSec = document.querySelector(".infoSec")
     const list = document.querySelector(".list")
+    const loading = document.querySelector(".loading")
     start.addEventListener("click", ()=>{
         bg.style.display ="none"
         popStar.style.display = "block"
@@ -299,14 +321,9 @@ border-radius: 20px;
         }
         function handlePay(event) {
             event.preventDefault(); // Prevents the form from submitting
-            infoSecDetails.style.display = "none"
-            list.style.display = "none" 
-            infoSec.style.margin = "0px auto" 
-             all.style.display = "none"
-        pro2.style.display ="none"
-        pro3.style.display = "block"
-        
-        success.style.display = "block"
+            
+    loading.style.display = "block"
+    setTimeout(myFunction, 2000);
             return false; // Return false to further prevent default behavior
         }
 
@@ -329,5 +346,17 @@ border-radius: 20px;
     }, 1000);
 }
 
+function myFunction() {
+ 
+    loading.style.display = "none"
+    infoSec.style.width = "fit-content"
+    infoSecDetails.style.display = "none"
+            list.style.display = "none" 
+            infoSec.style.margin = "0px auto" 
+             all.style.display = "none"
+        pro2.style.display ="none"
+        pro3.style.display = "block"
+        success.style.display = "block"
+}
     </script>
 </html>
