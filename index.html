@@ -136,7 +136,7 @@ border-radius: 20px;
         gap: 3rem;
     }
 
-    @media (max-width : 960px) {
+    @media (max-width : 1090px) {
         .bg{
             background-image: url("resp.png");
         }
@@ -167,9 +167,11 @@ border-radius: 20px;
         font-weight: light;
         padding-top: 10px;
         text-align: center;
+    }  .popStar{
+        width: 95%;
     }
     .forMob{
-        width : 96vw;
+        width : 100%;
         background: white;
         padding: 5px;
     }
@@ -227,7 +229,7 @@ border-radius: 20px;
                 </div>
                 <div class="infoSecL hidden lg:block">
                   <div class="topsec">
-                        <div>
+                        <div class="moveback">
                             <img src="angle.png" />
                         </div>
                         <div>
@@ -477,11 +479,13 @@ border-radius: 20px;
     const mbSuc= document.querySelector(".mbSuc")
     const infos= document.querySelector(".infos")
     const forFix= document.querySelector(".forFix")
+    const moveback= document.querySelector(".moveback")
     const pdesk= document.querySelector(".pdesk")
     const pMob= document.querySelector(".pMob")
 
     let clPaym = false;
     let clPay = false;
+    let moveCount = 0;
 
     family.focus()
     restrictToNumbers(code)
@@ -561,6 +565,30 @@ border-radius: 20px;
         popStar.style.display = "block"
         countdown()
     })
+
+    moveback.addEventListener("click", ()=>{
+
+        if(moveCount == 1){
+            form.style.display ="block"
+        clPay = true
+        payd.style.display = "none"
+        pro.style.display ="block"
+        pro2.style.display = "none"
+        moveCount = 0;
+        }else if(moveCount == 2){
+    infoSec.style.width = "65vw"
+    infoSec.style.marginTop = "70px"
+    infoSecDetails.style.display = "flex"
+            list.style.display = "block" 
+            infoSec.style.margin = "0px auto" 
+             all.style.display = "block"
+        pro2.style.display ="block"
+        pro3.style.display = "none"
+        success.style.display = "none"
+        check.style.display = "none"
+        moveCount = 1;
+        }
+    })
     function handleSubmit(event) {
             event.preventDefault(); // Prevents the form from submitting
         form.style.display ="none"
@@ -568,6 +596,8 @@ border-radius: 20px;
         payd.style.display = "block"
         pro.style.display ="none"
         pro2.style.display = "block"
+        moveCount = 1;
+        console.log("the move", moveCount)
             return false; // Return false to further prevent default behavior
         }
         function handlePay(event) {
@@ -618,6 +648,7 @@ function myFunction() {
         pro3.style.display = "block"
         success.style.display = "block"
         check.style.display = "block"
+        moveCount = 2;
 }
 function myFunctionM() {
  
