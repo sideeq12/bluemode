@@ -136,6 +136,22 @@ border-radius: 20px;
         gap: 3rem;
     }
 
+    @keyframes expandWidth {
+    from {
+        width: 150px;
+    }
+    to {
+        width: 400px;
+    }
+}
+
+/* Apply the animation to the image */
+.anibut {
+    width: 100px; /* Initial width */
+    animation: expandWidth 2s 1s forwards; /* 2s duration, forwards to maintain end state */
+}
+
+
     @media (max-width : 1090px) {
         .bg{
             background-image: url("resp.png");
@@ -214,7 +230,7 @@ border-radius: 20px;
         <div class="w-72 lg:w-96 -mt-20 lg:-mt-32 mx-auto mb-5">
         <img src="cou.png" class="h-[8vh] lg:h-[16vh] mr-auto" />
         </div>
-        <img src="je.png" class="h-[8vh] craq  lg:h-[10vh] w-fit mx-auto hover:pointer start" />
+        <img src="carque.png" class="h-[8vh] anibut craq  lg:h-[10vh] w-fit mx-auto hover:pointer start" />
         </div>
         <div class="popStar hidden">
             <img src="fd.png" class="h-[5vh] lg:h-[10vh] w-fit mx-auto" />
