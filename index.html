@@ -145,6 +145,14 @@ border-radius: 20px;
     }
 }
 
+@keyframes expandmode {
+    from {
+        width: 10px;
+    }
+    to {
+        width: 200px;
+    }
+}
 /* Apply the animation to the image */
 .anibut {
     width: 100px; /* Initial width */
@@ -153,6 +161,19 @@ border-radius: 20px;
 
 
     @media (max-width : 1090px) {
+        @keyframes expandmode {
+    from {
+        width: 10px;
+    }
+    to {
+        width: 200px;
+    }
+}
+        /* Apply the animation to the image */
+.anibut {
+    width: 100px; /* Initial width */
+    animation: expandmode 2s 1s forwards; /* 2s duration, forwards to maintain end state */
+}
         .bg{
             background-image: url("resp.png");
         }
@@ -230,8 +251,8 @@ border-radius: 20px;
         <div class="w-72 lg:w-96 -mt-20 lg:-mt-32 mx-auto mb-5">
         <img src="cou.png" class="h-[8vh] lg:h-[16vh] mr-auto" />
         </div>
-        <img src="curve.png" class="absolute bottom-14 left-[26%]"/>
-        <img src="carque.png" class="h-[8vh] anibut craq  lg:h-[10vh] w-fit mx-auto hover:pointer start" />
+        <img src="curve.png" class="absolute bottom-56 left-[1%] lg:bottom-14 lg:left-[26%]"/>
+        <img src="carque.png" class="h-[8vh]  anibut craq w-[60%]  lg:h-[10vh] lg:w-fit mx-auto hover:pointer start" />
         </div>
         <div class="popStar hidden">
             <img src="fd.png" class="h-[5vh] lg:h-[10vh] w-fit mx-auto" />
